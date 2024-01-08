@@ -1,7 +1,7 @@
 const Poetry = require("../models/poetryModel");
 const newPoetry = async (req, res) => {
   try {
-    const { Poet, Data } = req.file;
+    const { Poet, Data } = req.body;
     await Poetry.create({
       Poet,
       Data,
@@ -12,6 +12,11 @@ const newPoetry = async (req, res) => {
     });
   } catch (error) {
     console.error(error);
+    res.status(500).json({
+      success: false,
+      message: "failed to create ",
+      error: error.message,
+    });
   }
 };
 
